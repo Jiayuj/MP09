@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -25,6 +24,7 @@ public class Claus {
         }
         return sKey;
     }
+
     public static SecretKey passwordKeyGeneration(String text, int keySize) {
         SecretKey sKey = null;
         if ((keySize == 128)||(keySize == 192)||(keySize == 256)) {
@@ -40,6 +40,7 @@ public class Claus {
         }
         return sKey;
     }
+
     public static byte[] encryptData(SecretKey sKey, byte[] data) {
         byte[] encryptedData = null;
         try {
@@ -51,19 +52,12 @@ public class Claus {
         }
         return encryptedData;
     }
-    public static byte[] dencryptData(SecretKey sKey, byte[] data) {
-        boolean passerror = false;
-        byte[] encryptedData = null;
-        try {
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, sKey);
-            encryptedData =  cipher.doFinal(data);
 
-        } catch (BadPaddingException ex) {
-            System.out.println("password error");
-        } catch (Exception ex){
-            System.err.println("Error xifrant les dades: " + ex);
-        }
+    public static byte[] dencryptData(SecretKey sKey, byte[] data) throws Exception {
+        byte[] encryptedData = null;
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, sKey);
+        encryptedData =  cipher.doFinal(data);
         return encryptedData;
     }
 }
