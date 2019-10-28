@@ -8,9 +8,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
-
-
-
+    //autor Jiayu Jiang
     public static void main(String[] args) throws Exception {
         SecretKey secretKey;
         byte[] dataxifrat;
@@ -45,7 +43,7 @@ public class Main {
         Path path = Paths.get("textamagat");//se agafa dados de fiche.
         dataxifrat = Files.readAllBytes(path);//passar datos a dataxifrat.
         path = Paths.get("clausA4.txt");//llegin fiche de contrasenya.
-        String content = Files.readString(path);//guardar totas contrasenyes.
+        String content = Files.readString(path);//guardar totas contrasenyes. //readString solo aparti de JDK 11.
 
         Scanner srkey = new Scanner(content);//llegin contrasenya una en una.
         secretKey = Claus.passwordKeyGeneration( srkey.nextLine(),128);//genera clau amb primer contreasenya.
